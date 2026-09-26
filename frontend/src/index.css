@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900,500,300,400,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+    margin: 0;
+    background: #F9F9FA;
+    color: #0A0A0A;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background-image:
+        linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+}
+
+::selection { background: #0A0A0A; color: #FFCC00; }
+
+@layer base {
+    :root {
+        --background: 240 10% 98%;
+        --foreground: 0 0% 4%;
+        --card: 0 0% 100%;
+        --card-foreground: 0 0% 4%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 0 0% 4%;
+        --primary: 0 0% 4%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 0 0% 96%;
+        --secondary-foreground: 0 0% 4%;
+        --muted: 240 5% 92%;
+        --muted-foreground: 240 4% 35%;
+        --accent: 0 0% 92%;
+        --accent-foreground: 0 0% 4%;
+        --destructive: 4 100% 59%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 240 5% 89%;
+        --input: 240 5% 89%;
+        --ring: 0 0% 4%;
+        --chart-1: 211 100% 50%;
+        --chart-2: 142 67% 49%;
+        --chart-3: 47 100% 50%;
+        --chart-4: 4 100% 59%;
+        --chart-5: 270 60% 50%;
+        --radius: 0rem;
+    }
+}
+
+@layer base {
+    * { @apply border-border; }
+    body { @apply bg-background text-foreground; }
+    h1, h2, h3, h4 { font-family: 'Cabinet Grotesk', 'Space Grotesk', system-ui, sans-serif; letter-spacing: -0.02em; }
+}
+
+.font-display { font-family: 'Cabinet Grotesk', 'Space Grotesk', system-ui, sans-serif; }
+.font-mono-data { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+
+.grid-card { background: #FFFFFF; border: 1px solid #0A0A0A; }
+.grid-card-soft { background: #FFFFFF; border: 1px solid #E4E4E7; }
+.hard-shadow { box-shadow: 4px 4px 0 #0A0A0A; }
+.hard-shadow:hover { box-shadow: 6px 6px 0 #0A0A0A; transform: translate(-2px,-2px); transition: all 150ms; }
+
+.overline { text-transform: uppercase; letter-spacing: 0.2em; font-size: 11px; font-weight: 500; }
+
+button, input, select, textarea { border-radius: 0 !important; }
+
+@layer base {
+    [data-debug-wrapper="true"] { display: contents !important; }
+}

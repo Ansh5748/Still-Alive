@@ -1,0 +1,23 @@
+{
+  "name": "still-alive",
+  "version": "1.0.0",
+  "description": "Still Alive — Multi-agent platform for content analysis, legal risk detection, and growth optimization powered by TrueForge open-source agent harness",
+  "scripts": {
+    "trueforge": "npx @truefoundry/trueforge",
+    "trueforge:dev": "npx @truefoundry/trueforge --config trueforge.config.json",
+    "backend": "cd backend && uvicorn server:app --reload",
+    "frontend": "cd frontend && npm start",
+    "test:backend": "cd backend && pytest tests/"
+  },
+  "keywords": [
+    "truefoundry",
+    "trueforge",
+    "agent-harness",
+    "creator-intelligence",
+    "multi-agent",
+    "fastapi",
+    "react"
+  ],
+  "author": "Still Alive Team",
+  "license": "MIT"
+}

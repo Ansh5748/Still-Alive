@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="description" content="Still Alive — Creator + Brand Intelligence" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet" />
+        <script>
+            // MetaMask Shield & Global Extension Error Suppression
+            (function() {
+                // Aggressively stub ethereum and web3 to prevent extension injection
+                const silentStub = { 
+                    request: () => new Promise(() => {}), 
+                    on: () => {}, 
+                    removeListener: () => {}, 
+                    enable: () => new Promise(() => {}),
+                    isMetaMask: false 
+                };
+                
+                Object.defineProperty(window, 'ethereum', {
+                    configurable: false, enumerable: false, value: silentStub, writable: false
+                });
+                window.web3 = { currentProvider: silentStub };
+
+                // Suppress "Uncaught" errors from extensions that trigger the React Error Overlay
+                window.addEventListener('unhandledrejection', (e) => {
+                    const msg = (e.reason?.message || '').toLowerCase();
+                    if (msg.includes('metamask') || msg.includes('extension')) {
+                        e.stopImmediatePropagation();
+                        e.preventDefault();
+                    }
+                }, true);
+
+                window.addEventListener('error', (e) => {
+                    const msg = (e.message || '').toLowerCase();
+                    if (msg.includes('metamask') || msg.includes('extension')) {
+                        e.stopImmediatePropagation();
+                        e.preventDefault();
+                    }
+                }, true);
+            })();
+        </script>
+        <title>Still Alive</title>
+    </head>
+    <body>
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <div id="root"></div>
+        <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+        <a
+            id="emergent-badge"
+            target="_blank"
+            href="https://github.com/Ansh5748"
+            style="
+                display: inline-flex !important;
+                box-sizing: border-box;
+                width: 178px;
+                height: 40px;
+                padding: 8px 12px 8px 12px;
+                align-items: center !important;
+                gap: 8px;
+                border-radius: 50px !important;
+                background: #FFCC00 !important;
+                position: fixed !important;
+                bottom: 16px;
+                right: 16px;
+                text-decoration: none;
+                font-family: -apple-system, BlinkMacSystemFont,
+                    &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell,
+                    &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;,
+                    sans-serif !important;
+                font-size: 12px !important;
+                z-index: 9999 !important;
+            "
+        >
+            <img 
+                src="https://avatars.githubusercontent.com/u/169717681?v=4" 
+                width="20" 
+                height="20" 
+                style="border-radius: 50% !important;" 
+                alt="Divyansh Avatar"
+            />
+            <p
+                style="
+                    color: #0A0A0A !important;
+                    font-family: 'Inter', sans-serif !important;
+                    font-size: 13px !important;
+                    font-style: normal !important;
+                    font-weight: 600 !important;
+                    line-height: 20px !important;
+                    margin: 0 !important;
+                    white-space: nowrap !important;
+                "
+            >
+                Made By Divyansh
+            </p>
+        </a>
+    </body>
+</html>

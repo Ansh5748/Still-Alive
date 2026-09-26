@@ -1,0 +1,102 @@
+{
+  "theme": "light",
+  "archetype": "Archetype 4 (Swiss & High-Contrast)",
+  "design_philosophy": "A 'Control Room' command center for creators to dissect content virality and legal risks. Expose the data through a brutalist, high-density grid. Tension is created through stark contrasts, strict 1px borders, and aggressive accent colors for optimization modes. Reject 'soft' tech aesthetics; embrace a raw, intelligence-dashboard feel.",
+  "typography": {
+    "headings": {
+      "family": "Cabinet Grotesk, sans-serif",
+      "weights": "Light (300) and Black (900)",
+      "usage": "Use tight letter spacing (tracking-tighter) for H1/H2. Never center by default. Create tension with extreme weight contrast."
+    },
+    "body": {
+      "family": "IBM Plex Mono, monospace",
+      "weights": "Regular (400) and Medium (500)",
+      "usage": "Use for data tables, metrics, labels, and secondary text to give a raw, analytical 'developer' feel."
+    },
+    "scale": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tighter font-black",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight font-black",
+      "h3": "text-xl sm:text-2xl tracking-tight font-bold",
+      "h4": "text-lg sm:text-xl font-bold",
+      "body": "text-base",
+      "small": "text-sm",
+      "overline": "text-xs uppercase tracking-[0.2em] font-medium"
+    }
+  },
+  "colors": {
+    "background": "#F9F9FA",
+    "surface": "#FFFFFF",
+    "text_primary": "#0A0A0A",
+    "text_secondary": "#52525B",
+    "border": "#E4E4E7",
+    "accents": {
+      "safe_mode": "#34C759",
+      "controversial_mode": "#FFCC00",
+      "aggressive_mode": "#FF3B30",
+      "virality_blue": "#007AFF"
+    }
+  },
+  "layout_and_spacing": {
+    "strategy": "The 'Control Room' Grid (Mode B). Dense, data-heavy, scanable.",
+    "grid_system": "grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 or gap-6.",
+    "spacing_scale": "p-4 for dense widgets, p-6 for main sections. Generous negative space between major dashboard blocks.",
+    "alignment": "Strict left-alignment. Optical alignment for icons and text."
+  },
+  "surface_styles": {
+    "cards_and_widgets": "Grid Borders (The 'Technical' Look). 1px solid borders (border-collapse style when possible), NO drop shadows, sharp corners (rounded-none). Elements should feel like a rigid wireframe.",
+    "header": "Solid background with a hard 1px bottom border. z-50 fixed."
+  },
+  "components": {
+    "buttons": "Sharp corners. High contrast hover states (e.g., hover:bg-black hover:text-white). Focus states must have 2px offset ring.",
+    "inputs_and_forms": "Shadcn UI, but override radius to rounded-none. 1px border. Deep contrast on focus.",
+    "charts": "Shadcn/Recharts. Use stark, flat colors without gradients. Solid lines, no soft fills. Data is objective.",
+    "heatmap": "Dense grid of squares (calendar-like or continuous blocks) color-coded from green (safe) to red (risk). 1px border around blocks.",
+    "badges": "Sharp corners. Used for safe/controversial/aggressive modes with their respective accent colors and pure black/white text for contrast."
+  },
+  "motion": {
+    "hover": "Instant or 150ms hard transitions. No slow easing. Interactions must feel immediate and absolute.",
+    "entrance": "Staggered fade-up for dashboard widgets (200ms duration, linear or ease-out).",
+    "reduced_motion": "Respect prefers-reduced-motion by removing all non-essential transforms."
+  },
+  "image_urls": [
+    {
+      "category": "persona_avatar_1",
+      "url": "https://images.unsplash.com/photo-1758600435259-be2dc35a7ae2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaHwzfHxwb3J0cmFpdCUyMGhlYWRzaG90JTIwZXhwcmVzc2lvbnxlbnwwfHx8fDE3NzcxMDY1MDF8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Avatar for Haters/Fans in Persona Reaction Feed"
+    },
+    {
+      "category": "persona_avatar_2",
+      "url": "https://images.unsplash.com/photo-1765046300927-6c1827612c42?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaHwxfHxwb3J0cmFpdCUyMGhlYWRzaG90JTIwZXhwcmVzc2lvbnxlbnwwfHx8fDE3NzcxMDY1MDF8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Avatar for Haters/Fans in Persona Reaction Feed"
+    },
+    {
+      "category": "persona_avatar_3",
+      "url": "https://images.unsplash.com/photo-1770210982264-c0605c507eb4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaHwyfHxwb3J0cmFpdCUyMGhlYWRzaG90JTIwZXhwcmVzc2lvbnxlbnwwfHx8fDE3NzcxMDY1MDF8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Avatar for Haters/Fans in Persona Reaction Feed"
+    },
+    {
+      "category": "persona_avatar_4",
+      "url": "https://images.pexels.com/photos/32721690/pexels-photo-32721690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Avatar for Haters/Fans in Persona Reaction Feed"
+    },
+    {
+      "category": "google_auth_logo",
+      "url": "https://images.unsplash.com/photo-1706879350832-db2615866e54?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODl8MHwxfHNlYXJjaHwxfHxnb29nbGUlMjBsb2dvJTIwd2hpdGUlMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc3NzEwNjUwMXww&ixlib=rb-4.1.0&q=85",
+      "description": "Google Auth Logo for Login screen. Note: highly recommend using FcGoogle from react-icons/fc over this image if possible."
+    }
+  ],
+  "accessibility": {
+    "contrast": "Ensure minimum 4.5:1 ratio. Text colors over solid red/yellow badges must be checked (use pure black text over yellow, pure white over red).",
+    "testing": "All interactive elements MUST include data-testid attribute with kebab-case (e.g. data-testid=\"optimization-mode-toggle\")."
+  },
+  "instructions_to_main_agent": [
+    "Install fonts: 'Cabinet Grotesk' for headings and 'IBM Plex Mono' for body/data.",
+    "Install icons: Use 'phosphor-icons' (yarn add @phosphor-icons/react) for a dense, professional tech look. Use 'react-icons' (yarn add react-icons) for the Google auth icon.",
+    "Override default shadcn styles in tailwind config to remove rounded borders (set --radius to 0) and use stark monochrome colors.",
+    "Implement the 'Control Room' grid: 1px border-collapse style for widgets without drop shadows.",
+    "For the Heatmap, use Shadcn charts or a dense grid of elements colored dynamically from the accents palette.",
+    "Ensure the optimization mode toggle (SAFE/CONTROVERSIAL/AGGRESSIVE) dynamically shifts the active UI accent colors.",
+    "Never use generic placeholder images; rely strictly on the provided image_urls for the Persona Feed.",
+    "Strictly follow the typography scale: don't exceed text-6xl for main headings."
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://trueforge.dev/schema.json",
+  "name": "still-alive-harness",
+  "version": "1.0.0",
+  "description": "TrueForge Local Agent Harness for Still Alive Creator & Brand Intelligence System",
+  "provider": {
+    "name": "openai",
+    "apiKey": "${OPENAI_API_KEY}",
+    "fallbackProviders": [
+      {
+        "name": "gemini",
+        "apiKey": "${GEMINI_API_KEY}"
+      }
+    ]
+  },
+  "defaultModel": "gpt-4o-mini",
+  "models": {
+    "openai_fast": "gpt-4o-mini",
+    "openai_reasoning": "gpt-4o",
+    "gemini": "gemini-2.5-flash",
+    "gemini_lite": "gemini-2.5-flash-lite"
+  },
+  "pipeline": {
+    "entrypoint": "backend/agents.py",
+    "server": "backend/server.py",
+    "port": 8000
+  },
+  "subagents": [
+    {
+      "id": "agent1",
+      "name": "Content Breakdown Agent",
+      "role": "Verbatim scene extraction, tone and intent categorization",
+      "model": "gpt-4o-mini"
+    },
+    {
+      "id": "agent2",
+      "name": "Legal & Platform Risk Agent",
+      "role": "Indian Penal Code, IT Act & platform guideline verification",
+      "model": "gpt-4o"
+    },
+    {
+      "id": "agent3",
+      "name": "Virality & Backlash Agent",
+      "role": "Retention impact & backlash probability prediction",
+      "model": "gpt-4o-mini"
+    },
+    {
+      "id": "agent4",
+      "name": "Persona Feed Agent",
+      "role": "Synthetic community audience reaction simulation",
+      "model": "gpt-4o-mini"
+    },
+    {
+      "id": "agent5",
+      "name": "Script Optimization Agent",
+      "role": "Mode-based line-by-line script rewriting (Safe/Controversial/Aggressive)",
+      "model": "gpt-4o"
+    },
+    {
+      "id": "agent6",
+      "name": "Audience Intelligence Agent",
+      "role": "Channel top performer benchmark & content gap detection",
+      "model": "gpt-4o-mini"
+    },
+    {
+      "id": "agent7",
+      "name": "Growth & Sponsorship Agent",
+      "role": "Title/hook generation & D2C brand partnership discovery",
+      "model": "gpt-4o-mini"
+    }
+  ],
+  "sandboxing": {
+    "enabled": true,
+    "environment": "local-venv",
+    "pythonPath": "backend/venv/Scripts/python.exe"
+  },
+  "approvalCheckpoints": {
+    "enabled": false,
+    "interactive": true
+  },
+  "persistentSessions": {
+    "enabled": true,
+    "storage": "memory/sessions.json"
+  }
+}
