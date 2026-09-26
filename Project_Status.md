@@ -53,16 +53,20 @@ An AI-powered multi-agent intelligence platform for creators and brands to analy
 - [x] **Firebase Configuration**: Added missing `storageBucket` and `measurementId` to frontend environment variables.
 - [x] **Protocol Mismatch**: Switched frontend from HTTPS to HTTP for local development.
 - [x] **Model Validation**: Corrected non-existent Gemini model names in pipeline logic.
+- [x] **Single-Agent Re-run Engine**: Added dedicated `POST /api/analyses/{id}/rerun_agent/{agent_id}` endpoint and AsyncIOMotorClient background task to re-run individual agents isolated from other 6 cards.
+- [x] **Full 7-Agent Output Guarantee**: Added content-grounded fallback generators for all agents (1-7) to eliminate empty `{}` output when external APIs cap or rate limit.
+- [x] **Array Normalization & UI Crash Guarding**: Added `toArray()` normalizer helper in `AnalysisView.jsx` to prevent `TypeError: (s.claims || []).map is not a function` when LLM returns non-array string values.
+- [x] **Backend Import Fixes**: Added `import json` to `backend/server.py` resolving runtime load errors.
 
 ### ❌ Issues
 - [x] **Python 3.10 Compatibility**: Downgraded core libraries (Pandas, Pillow) to maintain support for legacy Python runtimes.
 - [x] **Invalid Package Versions**: Fixed non-existent `razorpay` version in requirements.
+- [x] **Non-Array Data Rendering Crash**: Resolved `(s.claims || []).map is not a function` crash on non-array LLM JSON output.
+- [x] **TrueForge Node.js ABI Warning**: Documented requirement for Node.js 22 when executing `@truefoundry/trueforge` native `better-sqlite3` bindings.
 - [ ] **Fetch Timeouts**: External channel fetching can occasionally exceed the 25s timeout limit.
 - [ ] **JSON Parsing**: Highly aggressive modes sometimes produce non-standard JSON blocks from the LLM.
 
 ## 3. Next Plan
 1.  **Refine Agent Prompts**: Improve the specificity of Agent 7 (Growth) to discover more niche-aligned D2C brands.
-2.  **Export Features**: Allow creators to export optimized scripts and growth reports as PDF/Markdown.
-3.  **Advanced Analytics**: Add a "Global Heatmap" to show virality vs. risk across the entire content duration.nds.
 2.  **Export Features**: Allow creators to export optimized scripts and growth reports as PDF/Markdown.
 3.  **Advanced Analytics**: Add a "Global Heatmap" to show virality vs. risk across the entire content duration.
