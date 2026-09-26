@@ -1,5 +1,6 @@
 """FastAPI app: JWT auth + profile + analyses + multi-agent pipeline."""
 import os
+import json
 import logging
 import asyncio
 import tempfile
@@ -717,6 +718,38 @@ async def rerun_agent_endpoint(analysis_id: str, agent_id: str, background_tasks
     from agents import run_single_agent
     background_tasks.add_task(run_single_agent, analysis_id, agent_id)
     return {"status": "started", "analysis_id": analysis_id, "agent_id": agent_id}
+
+
+@api.get("/trueforge/status")
+async def get_trueforge_status():
+    """TrueForge local agent harness & multi-agent pipeline status."""
+    tf_config_path = ROOT_DIR.parent / "trueforge.config.json"
+    tf_config = {}
+    if tf_config_path.exists():
+        try:
+            with open(tf_config_path, "r", encoding="utf-8") as f:
+                tf_config = json.load(f)
+        except Exception as e:
+            tf_config = {"error": str(e)}
+
+    return {
+        "ok": True,
+        "harness": "TrueForge Local Agent Router v1.0.0",
+        "provider": os.environ.get("LLM_PROVIDER", "auto"),
+        "has_openai": bool(os.environ.get("OPENAI_API_KEY")),
+        "has_gemini": bool(os.environ.get("GEMINI_API_KEY")),
+        "subagents": [
+            "agent1 (Content Breakdown)",
+            "agent2 (Legal Risk & Kanoon)",
+            "agent3 (Virality & Backlash)",
+            "agent4 (Persona Feed)",
+            "agent5 (Script Optimization)",
+            "agent6 (Audience Intelligence)",
+            "agent7 (Growth & Brands)"
+        ],
+        "config": tf_config
+    }
+
 
 
 

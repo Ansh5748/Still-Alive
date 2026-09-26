@@ -162,7 +162,7 @@ export default function AnalysisView() {
   const med = legal.filter((l) => /medium/i.test(l.risk || "")).length;
   const overallRisk = !legal.length ? "—" : high ? "HIGH" : med ? "MEDIUM" : "LOW";
 
-  const viralityChart = virality.map((v) => ({
+  const viralityChart = toArray(virality).map((v) => ({
     seg: v.segment_id,
     virality: Number(v.virality_score || 0),
     backlash: Number(v.backlash_probability || 0),
@@ -262,12 +262,12 @@ export default function AnalysisView() {
               ) : (
                 <>
                   <div className="grid grid-cols-12 gap-1 mb-5">
-                    {legal.map((l, i) => (
+                    {toArray(legal).map((l, i) => (
                       <div key={i} title={`${l.segment_id} ${l.risk}`} className="aspect-square border border-brand-ink" style={{ background: RISK_COLOR[l.risk] || "#E4E4E7" }} />
                     ))}
                   </div>
                   <ul className="divide-y divide-brand-edge">
-                    {legal.map((l, i) => (
+                    {toArray(legal).map((l, i) => (
                       <li key={i} className="py-3" data-testid={`legal-item-${i}`}>
                         <div className="flex flex-wrap items-center gap-2 mb-1">
                           <span className="font-mono-data text-xs bg-brand-ink text-white px-2 py-0.5">{l.segment_id}</span>
@@ -286,9 +286,9 @@ export default function AnalysisView() {
                         <div className="font-mono-data text-[10px] text-brand-muted mt-1">
                           REPORT {l.prob_report || 0}% · STRIKE {l.prob_strike || 0}% · NOTICE {l.prob_legal_notice || 0}% · CONF {l.confidence}
                         </div>
-                        {(l.citations || []).length > 0 && (
+                        {toArray(l.citations).length > 0 && (
                           <div className="mt-2 space-y-1">
-                            {(l.citations || []).slice(0, 3).map((c, j) => (
+                            {toArray(l.citations).slice(0, 3).map((c, j) => (
                               <a key={j} href={c.url} target="_blank" rel="noreferrer"
                                 className="block font-mono-data text-[10px] hover:bg-brand-ink hover:text-white p-1 -ml-1 transition-colors">
                                 <ArrowSquareOut size={10} weight="bold" className="inline mr-1" />
@@ -409,7 +409,7 @@ export default function AnalysisView() {
                     </ResponsiveContainer>
                   </div>
                   <ul className="mt-4 divide-y divide-brand-edge">
-                    {virality.map((v, i) => (
+                    {toArray(virality).map((v, i) => (
                       <li key={i} className="py-2 flex items-start gap-3" data-testid={`virality-item-${i}`}>
                         <span className="font-mono-data text-xs bg-brand-ink text-white px-2 py-0.5">{v.segment_id}</span>
                         <div className="flex-1">
@@ -451,7 +451,7 @@ export default function AnalysisView() {
                   <div className="border border-brand-ink p-3">
                     <div className="overline text-brand-muted">MEDIA NARRATIVE</div>
                     <div className="font-mono-data text-xs mt-1">{personas.media?.narrative || "—"}</div>
-                    {(personas.media?.headline_ideas || []).map((h, i) => (
+                    {toArray(personas.media?.headline_ideas).map((h, i) => (
                       <div key={i} className="font-display font-bold text-sm mt-1">› {h}</div>
                     ))}
                   </div>
@@ -485,11 +485,11 @@ export default function AnalysisView() {
                 />
               ) : (
                 <>
-                  {(scripts.scene_rewrites || []).length > 0 && (
+                  {toArray(scripts.scene_rewrites).length > 0 && (
                     <div>
                       <div className="overline text-brand-muted mb-2">SCENE REWRITES</div>
                       <div className="space-y-3">
-                        {scripts.scene_rewrites.map((sr, i) => (
+                        {toArray(scripts.scene_rewrites).map((sr, i) => (
                           <div key={i} className="border border-brand-ink" data-testid={`scene-rewrite-${i}`}>
                             <div className="px-3 py-2 bg-brand-ink text-white flex items-center justify-between">
                               <span className="font-mono-data text-xs">{sr.segment_id || `S${i + 1}`}</span>
@@ -519,17 +519,17 @@ export default function AnalysisView() {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <div className="overline text-brand-muted mb-2">HOOK IMPROVEMENTS</div>
-                      <ul className="space-y-1">{(scripts.hook_improvements || []).map((h, i) => <li key={i} className="font-mono-data text-xs">› {h}</li>)}</ul>
+                      <ul className="space-y-1">{toArray(scripts.hook_improvements).map((h, i) => <li key={i} className="font-mono-data text-xs">› {h}</li>)}</ul>
                     </div>
                     <div>
                       <div className="overline text-brand-muted mb-2">RETENTION TIPS</div>
-                      <ul className="space-y-1">{(scripts.retention_suggestions || []).map((h, i) => <li key={i} className="font-mono-data text-xs">› {h}</li>)}</ul>
+                      <ul className="space-y-1">{toArray(scripts.retention_suggestions).map((h, i) => <li key={i} className="font-mono-data text-xs">› {h}</li>)}</ul>
                     </div>
                   </div>
-                  {(scripts.what_changed || []).length > 0 && (
+                  {toArray(scripts.what_changed).length > 0 && (
                     <div className="p-3 border border-brand-ink bg-brand-paper">
                       <div className="overline text-brand-muted mb-1">WHAT CHANGED · WHAT'S PRESERVED</div>
-                      <ul className="space-y-1">{(scripts.what_changed || []).map((h, i) => <li key={i} className="font-mono-data text-xs">› {h}</li>)}</ul>
+                      <ul className="space-y-1">{toArray(scripts.what_changed).map((h, i) => <li key={i} className="font-mono-data text-xs">› {h}</li>)}</ul>
                     </div>
                   )}
                 </>
@@ -562,7 +562,7 @@ export default function AnalysisView() {
                   <div>
                     <div className="overline text-brand-muted mb-2">THUMBNAIL CONCEPTS</div>
                     <div className="grid grid-cols-1 gap-2">
-                      {(growth.thumbnails || []).map((t, i) => (
+                      {toArray(growth.thumbnails).map((t, i) => (
                         <div key={i} className="border border-brand-ink p-3">
                           <div className="font-display font-bold text-sm">{t.text}</div>
                           <div className="font-mono-data text-xs text-brand-muted mt-1">{t.concept}</div>
@@ -570,11 +570,11 @@ export default function AnalysisView() {
                       ))}
                     </div>
                   </div>
-                  <List title="SHORT CLIP TIMESTAMPS" items={(growth.short_clips || []).map((c) => `${c.timestamp} — ${c.why}`)} accent="#007AFF" />
+                  <List title="SHORT CLIP TIMESTAMPS" items={toArray(growth.short_clips).map((c) => typeof c === "string" ? c : `${c.timestamp || ""} — ${c.why || ""}`)} accent="#007AFF" />
                   <div>
                     <div className="overline text-brand-muted mb-2" style={{ borderLeft: "3px solid #FF3B30", paddingLeft: 8 }}>HIDDEN BRAND-FIT (DISCOVERED)</div>
                     <div className="grid grid-cols-1 gap-2">
-                      {(growth.brand_ideas || []).map((b, i) => (
+                      {toArray(growth.brand_ideas).map((b, i) => (
                         <div key={i} className="border border-brand-ink p-3 bg-white" data-testid={`brand-idea-${i}`}>
                           <div className="flex items-center justify-between gap-2 flex-wrap">
                             <div className="font-display font-bold text-sm">{typeof b === "string" ? b : b.brand_name}</div>
@@ -638,16 +638,21 @@ export default function AnalysisView() {
                         <td className="p-3"><span className="bg-brand-paper border border-brand-ink px-2 py-0.5">{s.intent || "—"}</span></td>
                         <td className="p-3"><Tags items={s.entities} /></td>
                         <td className="p-3">
-                          {(s.flags || []).length > 0 ? (
+                          {toArray(s.flags).length > 0 ? (
                             <div className="flex flex-wrap gap-1">
-                              {(s.flags || []).map((f, j) => <span key={j} className="bg-brand-aggro text-white px-1.5 py-0.5 text-[10px]">{f}</span>)}
+                              {toArray(s.flags).map((f, j) => <span key={j} className="bg-brand-aggro text-white px-1.5 py-0.5 text-[10px]">{f}</span>)}
                             </div>
+                          ) : typeof s.flags === "string" && s.flags ? (
+                            <span className="bg-brand-aggro text-white px-1.5 py-0.5 text-[10px]">{s.flags}</span>
                           ) : <span className="text-brand-muted">—</span>}
                         </td>
                         <td className="p-3"><Tags items={s.people_named} /></td>
                         <td className="p-3 max-w-xs">
-                          {(s.claims || []).map((c, j) => <div key={j} className="mb-1">› {c}</div>)}
-                          {(!s.claims || s.claims.length === 0) && "—"}
+                          {toArray(s.claims).length > 0 ? (
+                            toArray(s.claims).map((c, j) => <div key={j} className="mb-1">› {typeof c === "string" ? c : JSON.stringify(c)}</div>)
+                          ) : typeof s.claims === "string" && s.claims ? (
+                            <div className="mb-1">› {s.claims}</div>
+                          ) : <span className="text-brand-muted">—</span>}
                         </td>
                         <td className="p-3"><Tags items={s.numbers_stats} /></td>
                         <td className="p-3"><Bar2 v={s.emotion_score} c="#FFCC00" /></td>
@@ -707,17 +712,25 @@ function ModeBadge({ mode }) {
   const c = mode === "AGGRESSIVE" ? "bg-brand-aggro text-white" : mode === "CONTROVERSIAL" ? "bg-brand-contro text-brand-ink" : "bg-brand-safe text-brand-ink";
   return <span className={`px-3 py-2 font-mono-data text-xs font-medium ${c}`}>MODE / {mode}</span>;
 }
+function toArray(val) {
+  if (Array.isArray(val)) return val;
+  if (typeof val === "string" && val.trim()) return [val];
+  if (val && typeof val === "object") return Object.values(val);
+  return [];
+}
 function Persona({ avatar, label, tone, comments = [], extras = [], accent }) {
+  const extrasList = toArray(extras);
+  const commentsList = toArray(comments);
   return (
     <div className="flex gap-3 border-b border-brand-edge pb-3">
       <img src={avatar} alt={label} className="w-12 h-12 border border-brand-ink object-cover" />
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
           <span className="font-display font-bold text-sm" style={{ color: accent }}>{label}</span>
-          {extras.map((e, i) => <span key={i} className="overline text-brand-muted">· {e}</span>)}
+          {extrasList.map((e, i) => <span key={i} className="overline text-brand-muted">· {e}</span>)}
         </div>
         <div className="font-mono-data text-xs text-brand-muted mt-1">{tone}</div>
-        {(comments || []).slice(0, 2).map((c, i) => (
+        {commentsList.slice(0, 2).map((c, i) => (
           <div key={i} className="font-mono-data text-xs mt-1 bg-brand-paper border-l-2 border-brand-ink pl-2 py-1">"{c}"</div>
         ))}
       </div>
@@ -725,21 +738,23 @@ function Persona({ avatar, label, tone, comments = [], extras = [], accent }) {
   );
 }
 function List({ title, items = [], accent }) {
-  if (!items || items.length === 0) return null;
+  const list = toArray(items);
+  if (list.length === 0) return null;
   return (
     <div className="mb-4">
       <div className="overline text-brand-muted mb-2" style={{ borderLeft: `3px solid ${accent}`, paddingLeft: 8 }}>{title}</div>
       <ul className="space-y-1">
-        {items.map((it, i) => <li key={i} className="font-mono-data text-xs">› {typeof it === "string" ? it : JSON.stringify(it)}</li>)}
+        {list.map((it, i) => <li key={i} className="font-mono-data text-xs">› {typeof it === "string" ? it : JSON.stringify(it)}</li>)}
       </ul>
     </div>
   );
 }
 function Tags({ items = [] }) {
-  if (!items || items.length === 0) return <span className="text-brand-muted">—</span>;
+  const list = toArray(items);
+  if (list.length === 0) return <span className="text-brand-muted">—</span>;
   return (
     <div className="flex flex-wrap gap-1">
-      {items.slice(0, 6).map((t, i) => (
+      {list.slice(0, 6).map((t, i) => (
         <span key={i} className="bg-brand-paper border border-brand-ink px-1.5 py-0.5 text-[10px]">{t}</span>
       ))}
     </div>
